@@ -3,7 +3,6 @@ from psycopg2 import Error
 import tkinter as tk
 from tkinter import ttk, messagebox, scrolledtext
 
-# 🔗 Função para criar conexão com PostgreSQL
 def criar_conexao():
     try:
         conn = psycopg2.connect(
@@ -18,7 +17,7 @@ def criar_conexao():
         print(f"Erro na conexão: {e}")
         return None
 
-# 🗄️ Criação de tabelas
+
 def criar_tabelas(conn):
     cursor = conn.cursor()
     cursor.execute("""
@@ -66,7 +65,7 @@ def buscar_matriculas(conn):
     cursor.execute("SELECT nome, matricula FROM alunos")
     return cursor.fetchall()
 
-# 🔥 CRUD Notas
+
 def inserir_nota(conn, nota):
     cursor = conn.cursor()
     cursor.execute("INSERT INTO notas (matricula, materia, nota) VALUES (%s, %s, %s)", nota)
@@ -88,7 +87,7 @@ def selecionar_notas_organizadas(conn):
         agrupado[matricula]["notas"].append((materia, nota))
     return agrupado
 
-# 🖥️ Interface Tkinter
+
 class App(tk.Tk):
     def _init_(self):
         super()._init_()
